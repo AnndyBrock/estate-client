@@ -33,7 +33,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className="imageContainer">
-                <img src="/bg.png"/>
+                <img src="/bg_new.png"/>
             </div>
         </div>
     );
