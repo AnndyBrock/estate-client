@@ -1,19 +1,19 @@
 import React, {useContext, useState} from 'react';
 import './navbar.scss'
 import { Link, useNavigate } from "react-router-dom";
-import { userData } from "../../lib/dummydata";
-import { UserContext } from '../../context/UserContext.jsx';
+import { AuthContext } from '../../context/AuthContext.jsx';
 import request from "../../lib/request.js";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(null);
-    const { user, setUser } = useContext(UserContext);
+    const [isHovered, setIsHovered] = useState(false);
+    const { user, setUser } = useContext(AuthContext);
 
 
     const navigate = useNavigate();
 
-    const [notification, setNotification] = useState(0)
+    const [notification, setNotification] = useState(2)
 
     const handleLogout = async () => {
         try {
@@ -33,7 +33,7 @@ const Navbar = () => {
         <nav>
             <div className="left">
                 <a href="/" className="logo">
-                    <img src="/logo.png" />
+                    <img src="/logo_2.png" />
                     <span>Canada Estate</span>
                 </a>
                 <a href="/home">Home</a>
@@ -46,30 +46,44 @@ const Navbar = () => {
                     user ? (
                         <div className="user">
                             <img src={user.avatar || "/noavatar.jpg"} alt=""/>
-                            <span>{`${user.firstName || ''} ${user.lastName || ''}`.trim()}</span>
-                            <Link className="profile" to="/profile">
-                                { notification ?
-                                    (<div className="notification">1</div>)
-                                    :
-                                    (<></>)
-                                }
-                                <span>Profile</span>
-                            </Link>
-
-                            <Link className="profile" to="/" onClick={handleLogout}>
+                            <div
+                                className="username-dropdown"
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
+                                aria-haspopup="true"
+                                aria-expanded={isHovered}
+                            >
+                <span className="username">
+                    {`${user.firstName || ''}`.trim()}
+                    {!isHovered && notification && (
+                        <div className="notification">{notification}</div>
+                    )}
+                </span>
+                                <div className="dropdown-content">
+                                    <Link className="dropdown-link profile" to="/profile">
+                                        {isHovered && notification ? (
+                                            <div className="notification">{notification}</div>
+                                        ) : null}
+                                        <span>Profile</span>
+                                    </Link>
+                                    <Link className="dropdown-link listings" to="/listings">
+                                        <span>Listings</span>
+                                    </Link>
+                                </div>
+                            </div>
+                            <Link to="/" onClick={handleLogout} className="logout-link">
                                 <span>Log Out</span>
                             </Link>
-
                         </div>
-                    ) : ( <div className="user">
+                    ) : (<div className="user">
                         <a href="/login">Sign In</a>
                         <a href="/register" className="profile">Sign Up</a>
                     </div>)
                 }
                 <div className="menuIcon">
-                <img src="/menu.png" alt="" onClick={()=> setOpen(!open )}/>
+                    <img src="/menu.png" alt="" onClick={() => setOpen(!open)}/>
                 </div>
-                <div className={open ? "menu active" :"menu"}>
+                <div className={open ? "menu active" : "menu"}>
                     <a href="/home">Home</a>
                     <a href="/home">About</a>
                     <a href="/home">Contact</a>

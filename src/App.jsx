@@ -42,11 +42,11 @@ function App() {
             element: <RequireLayout />,
             children: [
                 {
-                    path:"/profile",
+                    path:"/listings",
                     element:<Profile />
                 },
                 {
-                    path:"/edit-profile",
+                    path:"/profile",
                     element:<ProfileUpdatePage />
                 },
             ]

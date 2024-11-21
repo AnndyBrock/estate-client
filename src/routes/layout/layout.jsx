@@ -2,7 +2,7 @@ import "./layout.scss";
 import Navbar from "../../components/navbar/Navbar";
 import HomePage from "../homePage/homePage";
 import {Navigate, Outlet} from "react-router-dom";
-import {UserContext} from "../../context/UserContext.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 import {useContext, useEffect} from "react";
 
 const Layout = () => {
@@ -19,7 +19,7 @@ const Layout = () => {
 };
 
 const RequireLayout = () => {
-    const { user } = useContext(UserContext);
+    const { user } = useContext(AuthContext);
     return (
        !user ? <Navigate to={"/login"} /> : (<div className="layout">
             <div className="navbar">

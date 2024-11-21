@@ -1,12 +1,11 @@
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profile.scss";
-import { useNavigate } from "react-router-dom";
-import {useContext, useEffect} from "react";
-import {UserContext} from "../../context/UserContext.jsx";
+import { useContext } from "react";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 function ProfilePage() {
-    const { user, setUser } = useContext(UserContext);
+    const { user, updateUser } = useContext(AuthContext);
 
     return (
         <div className="profilePage">

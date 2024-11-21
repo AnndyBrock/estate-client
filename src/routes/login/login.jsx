@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import request from "../../lib/request.js";
-import { UserContext } from "../../context/UserContext.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import "./login.scss";
 import {getRandomBackgroundImage} from "../../lib/randomBgImg.js";
 
 function Login() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const { setUser } = useContext(UserContext);
+    const {updateUser} = useContext(AuthContext)
 
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function Login() {
 
             if (res.status === 201 || res.status === 200) {
                 localStorage.setItem("user", JSON.stringify(res.data.user));
-                setUser(res.data.user);
+                updateUser(res.data.user);
                 navigate("/");
             } else {
                 setError(
@@ -41,6 +41,7 @@ function Login() {
                 );
             }
         } catch (e) {
+            console.log(e)
             setError(
                 e.response?.data?.message || "An error occurred. Please try again."
             );
