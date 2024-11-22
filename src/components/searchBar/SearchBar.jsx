@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import './searchBar.scss'
 
 const types = ['buy', 'rent']

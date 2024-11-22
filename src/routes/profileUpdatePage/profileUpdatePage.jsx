@@ -1,5 +1,5 @@
 import {AuthContext} from "../../context/AuthContext.jsx";
-import React, {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import "./profileUpdatePage.scss";
 import {useNavigate} from "react-router-dom";
 import request from "../../lib/request.js";

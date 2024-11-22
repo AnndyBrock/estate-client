@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import {useContext, useState} from 'react';
 import './navbar.scss'
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../context/AuthContext.jsx';
@@ -8,19 +8,17 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(null);
     const [isHovered, setIsHovered] = useState(false);
-    const { user, setUser } = useContext(AuthContext);
-
+    const { user, updateUser } = useContext(AuthContext);
+    const [notification, setNotification] = useState(2)
 
     const navigate = useNavigate();
-
-    const [notification, setNotification] = useState(2)
 
     const handleLogout = async () => {
         try {
             const res = await request.post('/auth/logout');
 
             if (res.status === 200) {
-                setUser(null)
+                updateUser(null)
                 localStorage.removeItem('user');
                 navigate('/');
             }

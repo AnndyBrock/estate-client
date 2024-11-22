@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {userData} from "../../lib/dummydata.js"
 
 import "./chat.scss"
