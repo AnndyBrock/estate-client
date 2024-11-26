@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import request from "../../lib/request.js";
+import requestAPI from "../../lib/request.js";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import "./login.scss";
 import {getRandomBackgroundImage} from "../../lib/randomBgImg.js";
@@ -26,7 +26,7 @@ function Login() {
         const password = formData.get("password");
 
         try {
-            const res = await request.post("/auth/login", {
+            const res = await requestAPI.post("/auth/login", {
                 email,
                 password,
             });
@@ -72,7 +72,7 @@ function Login() {
                     />
                     <button disabled={loading}>Login</button>
                     {error && <div className="error">{error}</div>}
-                    <Link to="/register">Don't you have an account?</Link>
+                    <Link to="/register">Don`t you have an account?</Link>
                 </form>
             </div>
             <div className="imgContainer">

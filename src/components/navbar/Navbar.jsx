@@ -2,7 +2,7 @@ import {useContext, useState} from 'react';
 import './navbar.scss'
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../context/AuthContext.jsx';
-import request from "../../lib/request.js";
+import requestAPI from "../../lib/request.js";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
@@ -15,7 +15,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await request.post('/auth/logout');
+            const res = await requestAPI.post('/auth/logout');
 
             if (res.status === 200) {
                 updateUser(null)

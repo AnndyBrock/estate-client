@@ -2,7 +2,7 @@ import {AuthContext} from "../../context/AuthContext.jsx";
 import {useContext, useEffect, useState} from "react";
 import "./profileUpdatePage.scss";
 import {useNavigate} from "react-router-dom";
-import request from "../../lib/request.js";
+import requestAPI from "../../lib/request.js";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
 
 
@@ -32,7 +32,7 @@ function ProfileUpdatePage () {
         const { firstName, lastName, email, phone, password, company } = Object.fromEntries(formData);
 
         try {
-            const res = await request.put(`/users/${user.id}`, {
+            const res = await requestAPI.put(`/users/${user.id}`, {
                 firstName,
                 lastName,
                 email,

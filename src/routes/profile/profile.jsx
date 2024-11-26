@@ -1,6 +1,7 @@
 import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profile.scss";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext.jsx";
 
@@ -39,7 +40,9 @@ function ProfilePage() {
             </div>
                 <div className="title">
                 <h1>My List</h1>
-                <button>Create New Post</button>
+                    <Link to="/add">
+                        <button>Create New Post</button>
+                    </Link>
             </div>
             <List />
                 <div className="title">

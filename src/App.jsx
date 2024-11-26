@@ -7,6 +7,8 @@ import Profile from "./routes/profile/profile.jsx";
 import Login from "./routes/login/login.jsx";
 import Register from "./routes/register/register.jsx";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage.jsx";
+import NewPost from "./routes/newPost/newPost.jsx";
+import {listPageLoader, singlePageLoader} from "./lib/loaders.js";
 
 
 function App() {
@@ -21,11 +23,13 @@ function App() {
                 },
                 {
                     path:"/list",
-                    element:<ListPage />
+                    element:<ListPage />,
+                    loader: listPageLoader
                 },
                 {
                     path:"/:id",
-                    element:<SinglePage />
+                    element:<SinglePage />,
+                    loader: singlePageLoader
                 },
                 {
                     path:"/login",
@@ -48,6 +52,10 @@ function App() {
                 {
                     path:"/profile",
                     element:<ProfileUpdatePage />
+                },
+                {
+                    path:"/add",
+                    element:<NewPost />
                 },
             ]
         }

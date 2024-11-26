@@ -1,19 +1,39 @@
-import {useState} from 'react';
-import './searchBar.scss'
+import { useState } from 'react';
+import './searchBar.scss';
+import { Link } from "react-router-dom";
 
-const types = ['buy', 'rent']
+const types = ['buy', 'rent'];
+
+const buildQueryString = (params) => {
+    const queryParams = new URLSearchParams();
+    for (const key in params) {
+        const value = params[key];
+        if (value !== null && value !== undefined && value !== '') {
+            queryParams.append(key, value);
+        }
+    }
+    return queryParams.toString();
+};
 
 const SearchBar = () => {
     const [query, setQuery] = useState({
         type: "buy",
-        location: "",
-        minPrice: 0,
-        maxPrice: 0
-    })
+        city: "",
+        minPrice: "",
+        maxPrice: ""
+    });
 
     const switchType = (val) => {
-        setQuery(prev => ({ ...prev, type: val }))
-    }
+        setQuery(prev => ({ ...prev, type: val }));
+    };
+
+    const handleChange = (e) => {
+        setQuery(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
 
     return (
         <div className="searchBar">
@@ -28,17 +48,20 @@ const SearchBar = () => {
                     </button>
                 ))}
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    name="location"
-                    placeholder="City"/>
+                    name="city"
+                    placeholder="City"
+                    onChange={handleChange}
+                />
                 <input
                     type="number"
                     name="minPrice"
                     min={0}
                     max={10000000}
                     placeholder="Min Price"
+                    onChange={handleChange}
                 />
                 <input
                     type="number"
@@ -46,10 +69,13 @@ const SearchBar = () => {
                     min={0}
                     max={10000000}
                     placeholder="Max Price"
+                    onChange={handleChange}
                 />
-                <button>
-                    <img src="/search.png" alt=""/>
-                </button>
+                <Link to={`/list?${buildQueryString(query)}`}>
+                    <button type="submit">
+                        <img src="/search.png" alt="Search" />
+                    </button>
+                </Link>
             </form>
         </div>
     );

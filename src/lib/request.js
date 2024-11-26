@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const request = axios.create({
+const requestAPI = axios.create({
     baseURL: "http://localhost:8000/api",
     withCredentials: true
 })
 
-export default request;
+export default requestAPI;
