@@ -30,7 +30,7 @@ const Card = ({ item }) => {
                         </div>
                     </div>
                     <div className="icons">
-                        <div className="icon">
+                        <div className="icon" >
                             <img src="/save.png"/>
                         </div>
                         <div className="icon">

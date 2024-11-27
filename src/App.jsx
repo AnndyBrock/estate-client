@@ -8,7 +8,7 @@ import Login from "./routes/login/login.jsx";
 import Register from "./routes/register/register.jsx";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage.jsx";
 import NewPost from "./routes/newPost/newPost.jsx";
-import {listPageLoader, singlePageLoader} from "./lib/loaders.js";
+import {listPageLoader, myListingLoader, singlePageLoader} from "./lib/loaders.js";
 
 
 function App() {
@@ -47,7 +47,8 @@ function App() {
             children: [
                 {
                     path:"/listings",
-                    element:<Profile />
+                    element:<Profile />,
+                    loader: myListingLoader
                 },
                 {
                     path:"/profile",
