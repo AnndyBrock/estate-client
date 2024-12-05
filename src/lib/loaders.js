@@ -1,5 +1,4 @@
-import { defer } from "react-router-dom";
-import { redirect } from "react-router-dom";
+import { defer, redirect } from "react-router-dom";
 
 import requestAPI from "./request.js"
 
@@ -17,14 +16,17 @@ export const listPageLoader = async ({request, params}) => {
 }
 
 export const myListingLoader = async () => {
-   try{
-       const listings = await requestAPI("/users/my/listings");
-       return listings.data
-   } catch (e) {
-       if (e.response && e.response.status === 401) {
-           return redirect("/login");
-       }
-
-       throw e;
-   }
-}
+    try {
+        const listings = await requestAPI("/users/my/listings");
+        const chats = await requestAPI("/chats");
+        return defer({
+            listingsResponse: listings.data,
+            chatResponse: chats.data,
+        });
+    } catch (e) {
+        if (e.response && e.response.status === 401) {
+            return redirect("/login");
+        }
+        throw e;
+    }
+};
